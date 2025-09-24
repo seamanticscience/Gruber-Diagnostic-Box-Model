@@ -134,7 +134,7 @@ c     local variables
 c --------------------------------------------------------------------
 c     
       INTEGER j
-      REAL d,dd,sv,y,y2
+      double precision d,dd,sv,y,y2
 c
 c =====================================================================
 c     begin of executable code
