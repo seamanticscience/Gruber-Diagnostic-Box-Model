@@ -98,7 +98,7 @@ c --------------------------------------------------------------------
 c     
       
       do k = 1,nstep_start-1
-         do i = i,nproc_rates
+         do i = 1,nproc_rates
             D_C_runavg(i,k) = 0.0d0
             D_C_a_runavg(i,k) = 0.0d0
          enddo
@@ -158,7 +158,7 @@ c --------------------------------------------------------------------
 c     
       
       do k = nstep_stop+1,nstep
-         do i = i,nproc_rates
+         do i = 1,nproc_rates
             D_C_runavg(i,k) = 0.0d0
             D_C_a_runavg(i,k) = 0.0d0
          enddo
