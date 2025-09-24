@@ -119,10 +119,16 @@ c
             enddo
          enddo
       else
-         sg_int_rates(i,j)   = -99.99
-         wsg_int_rates(i,j)  = -99.99
-         sg_int_fluxes(j,i)  = -99.99
-         wsg_int_fluxes(j,i) = -99.99
+         do i = 1,nyears
+            do j = 1,nproc_rates
+               sg_int_rates(i,j)   = -99.99
+               wsg_int_rates(i,j)  = -99.99
+            enddo
+            do j = 1,nproc_fluxes
+               sg_int_fluxes(i,j)  = -99.99
+               wsg_int_fluxes(i,j) = -99.99
+            enddo
+         enddo
       endif
 c
 c ---------------------------------------------------------------------
