@@ -27,8 +27,8 @@ include $(ROOT)/ifdefs
 # -- COMPILATION MACROS 
 # -------------------------------------------------------------------------
 
-F_C      = g77
-NCARF_C = ncargf77
+F_C      = gfortran
+NCARF_C = ncargf90
 !F_C = lf95
 !NCARF_C = ncarglf95
 #

@@ -46,7 +46,7 @@ include $(ROOT)/ifdefs
 # -- COMPILATION MACROS 
 # -------------------------------------------------------------------------
 
-F_C      = g77
+F_C      = gfortran
 !F_C      = lf95
 #
 F_FLAGS  = -C 
