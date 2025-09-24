@@ -57,7 +57,7 @@ c
       parameter(nmajdef = 10)
       real xmin,xmax,dx,delta,fac
       real xl,xr
-      integer iz
+      integer iz,nvalid
 c
 c =====================================================================
 c     begin of executable code
@@ -72,15 +72,37 @@ c --------------------------------------------------------------------
 c
       xmin = 9.99e10
       xmax = -9.99e10
+      nvalid=0
 c     
-      do j=1,ndata
-         if (x(j) .gt. xmax) then
-            xmax = x(j)
-         endif
-         if (x(j) .lt. xmin) then
-            xmin = x(j)
+CJML      do j=1,ndata
+CJML         if (x(j) .gt. xmax) then
+CJML            xmax = x(j)
+CJML         endif
+CJML         if (x(j) .lt. xmin) then
+CJML            xmin = x(j)
+CJML         endif
+CJML      enddo
+      do j = 1, ndata
+         if (x(j) .eq. x(j)) then        ! ignore NaNs (NaN .ne. NaN)
+            if (x(j) .gt. xmax) xmax = x(j)
+            if (x(j) .lt. xmin) xmin = x(j)
+            nvalid = nvalid + 1
          endif
       enddo
+
+      if (nvalid .le. 1) then
+         if (nvalid .eq. 1) then
+            delta = 0.5*max(1.0, abs(xmin))
+            axismin = xmin - delta
+            axismax = xmin + delta
+         else
+            axismin = 0.0
+            axismax = 1.0
+         endif
+         nmajticks = 5
+         nminticks = 4
+         return
+      endif
 c
 c --------------------------------------------------------------------
 c     add 5% at each side
@@ -98,7 +120,18 @@ c --------------------------------------------------------------------
 c     find optimum delta between xmin and xmax
 c --------------------------------------------------------------------
 c
-      dx = (xmax-xmin)/(float(nmajdef))
+CJML      dx = (xmax-xmin)/(float(nmajdef))
+      delta = xmax - xmin
+      if (delta .le. 0.0) then
+         delta = 0.05*max(1.0, abs(xmin))
+         if (delta .eq. 0.0) delta = 1.0
+         xmin = xmin - delta
+         xmax = xmax + delta
+         delta = xmax - xmin
+      endif
+
+      dx = delta/float(nmajdef)
+
       if (abs(dx) .lt. 1)then
         iz = int(abs(log10(abs(dx)))+1)
       else
@@ -120,7 +153,9 @@ c --------------------------------------------------------------------
 c
       axismin = xl
       axismax = xr
-      nmajticks = nint((xr-xl)/dx)
+CJML      nmajticks = nint((xr-xl)/dx)
+      if (abs(dx) .lt. 1.0e-30) dx = 1.0
+      nmajticks = nint((xr - xl)/dx)      
       nminticks = 5
 c
 c      write(*,*) 'xmin : ',xmin

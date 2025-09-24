@@ -198,38 +198,77 @@ c---------------------------------------------------------------------
 c
 c      write(*,*) '--PLOT_RESULTS: drawing the lines '
 c
-      do 4000, ns=1,nsets
-
+CJML      do 4000, ns=1,nsets
+C
 c
-         do 3100, j=1,nvalplot(ns)
-            xvalplot1(j) = xvalplot(ns,j)
-            yvalplot1(j) = yvalplot(ns,j)
- 3100    continue
+C         do 3100, j=1,nvalplot(ns)
+C            xvalplot1(j) = xvalplot(ns,j)
+C            yvalplot1(j) = yvalplot(ns,j)
+C 3100    continue
 c
-         il = 1                 ! connects with lines
+C         il = 1                 ! connects with lines
 c
-         if (colored) then
-            if (auto_style) then
-               colindx = ns+1
-            else
-               colindx = line_color(ns)
+C         if (colored) then
+C            if (auto_style) then
+C               colindx = ns+1
+C            else
+C               colindx = line_color(ns)
+C            endif
+C         else
+C            colindx = 1
+C         endif
+c
+C         if (auto_style) then
+C            dashpat = mod(ns-1,5)+1
+C         else
+C            dashpat = line_dashpat(ns)
+C         endif
+c
+C         call gsplci(colindx)   ! select color of lines
+C         call gsln(dashpat)     ! set dashpat
+Cc         str = '$$$$$$$$$$$'//legendlabel(ns)//'$$$$$$$'
+Cc         call dashdc(str,15,20) ! adds legendlabel to line
+C         call curved(xvalplot1,yvalplot1,nvalplot(ns))
+C 4000 continue
+      do 4000, ns = 1, nsets
+c        gather only finite points for this set
+         nvalplot1 = 0
+         do 3100, j = 1, nvalplot(ns)
+c           filter NaNs/Infs (NaN .ne. NaN)
+            if (xvalplot(ns,j) .eq. xvalplot(ns,j) .and.
+     $          yvalplot(ns,j) .eq. yvalplot(ns,j)) then
+               nvalplot1 = nvalplot1 + 1
+               xvalplot1(nvalplot1) = xvalplot(ns,j)
+               yvalplot1(nvalplot1) = yvalplot(ns,j)
             endif
-         else
-            colindx = 1
+ 3100    continue
+
+c        only draw if we have at least 2 valid points
+         if (nvalplot1 .ge. 2) then
+            il = 1
+
+            if (colored) then
+               if (auto_style) then
+                  colindx = ns + 1
+               else
+                  colindx = line_color(ns)
+               endif
+            else
+               colindx = 1
+            endif
+
+            if (auto_style) then
+               dashpat = mod(ns-1,5)+1
+            else
+               dashpat = line_dashpat(ns)
+            endif
+
+            call gsplci(colindx)
+            call gsln(dashpat)
+            call curved(xvalplot1, yvalplot1, nvalplot1)
          endif
-c
-         if (auto_style) then
-            dashpat = mod(ns-1,5)+1
-         else
-            dashpat = line_dashpat(ns)
-         endif
-c
-         call gsplci(colindx)   ! select color of lines
-         call gsln(dashpat)     ! set dashpat
-c         str = '$$$$$$$$$$$'//legendlabel(ns)//'$$$$$$$'
-c         call dashdc(str,15,20) ! adds legendlabel to line
-         call curved(xvalplot1,yvalplot1,nvalplot(ns))
  4000 continue
+
 c
 c---------------------------------------------------------------------
 c     draw the tick labels
@@ -247,7 +286,7 @@ c
 c      write(*,*) '--PLOT_RESULTS: drawing x-tick labels...'
 c      write(*,*) '  format = ',tickformat(1)
       ypos = yplot(1) - 0.05*(yplot(2)-yplot(1))
-      mjtickdistx = (xplot(2)-xplot(1))/nticks(1,1)
+      mjtickdistx = (xplot(2)-xplot(1))/max(1,nticks(1,1))
 c
       if (plottype .eq. 'ts') then
          do i=1,(nticks(1,1))
@@ -276,7 +315,7 @@ c
 c      write(*,*) '--PLOT_RESULTS: drawing y-tick labels...'
 c      write(*,*) '  format = ',tickformat(2)
       xpos = xplot(1) - 0.05*(xplot(2)-xplot(1))
-      mjtickdisty = (yplot(2)-yplot(1))/nticks(2,1)
+      mjtickdisty = (yplot(2)-yplot(1))/max(1,nticks(2,1))
                   
       do 5300, i=1,(nticks(2,1)+1)
          ypos = yplot(1) + (i-1)*mjtickdisty
