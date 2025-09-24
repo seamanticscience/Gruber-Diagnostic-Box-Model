@@ -459,15 +459,29 @@ c     calculate dC13 values of the five processes
 c ---------------------------------------------------------------------
 c
          do i = 1,4
-            if ((D_C(i,k) .ne. 0.d0) .and. 
-     $           (D_C13(i,k)/D_C(i,k) .ne. 1.d0)) then
-               nsum_dc13_prc(i) = nsum_dc13_prc(i) + 1
-               r_prc = (D_C13(i,k)/D_C(i,k)) / 
-     $              (1-(D_C13(i,k)/D_C(i,k)))
-               dc13_tmp = (r_prc/r_std - 1.d0) * 1.d3
-               sum_dc13_prc(i) = sum_dc13_prc(i) + dc13_tmp
+            denom = D_C(i,k)
+            if (abs(denom) > 10.d0*tiny(denom)) then
+               ratio = D_C13(i,k) / denom
+               if (abs(ratio-1.d0) > 10.d0*epsilon(1.d0)) then
+                  nsum_dc13_prc(i) = nsum_dc13_prc(i) + 1
+                  denom2 = 1.d0 - ratio
+                  denom2 = sign(max(abs(denom2), 10.d0*tiny(1.d0)), denom2)
+                  r_prc = ratio / denom2
+                  dc13_tmp = (r_prc/r_std - 1.d0) * 1.d3
+                  sum_dc13_prc(i) = sum_dc13_prc(i) + dc13_tmp
+               endif
             endif
          enddo
+C         do i = 1,4
+C            if ((D_C(i,k) .ne. 0.d0) .and. 
+C     $           (D_C13(i,k)/D_C(i,k) .ne. 1.d0)) then
+C               nsum_dc13_prc(i) = nsum_dc13_prc(i) + 1
+C               r_prc = (D_C13(i,k)/D_C(i,k)) / 
+C     $              (1-(D_C13(i,k)/D_C(i,k)))
+C               dc13_tmp = (r_prc/r_std - 1.d0) * 1.d3
+C               sum_dc13_prc(i) = sum_dc13_prc(i) + dc13_tmp
+C            endif
+C         enddo
 c
 c ---------------------------------------------------------------------
 c     for debugging purposes
