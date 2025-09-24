@@ -33,8 +33,7 @@ NCARF_C = ncargf90
 !NCARF_C = ncarglf95
 #
 #F_FLAGS  = 
-F_FLAGS  = -C 
-#
+F_FLAGS  = -C -g  -fbacktrace -O0 -finit-real=snan -finit-integer=-2147483648 -fno-automatic -std=legacy -cpp -I/home/data/Gruber-Box-Model-2/src_ia/incl -fcheck=all -finit-real=nan -ffpe-trap=invalid,zero,overflow -Wall -Wextra -Wno-compare-reals -Wno-unused-label -Wno-unused-variable -Wno-unused-dummy-argument -Wno-unused-parameter -Wno-line-truncation -Wno-cpp
 # -------------------------------------------------------------------------
 # -- EXTERNAL OBJECTS FILES:
 # -- example: ( EXT_O_FILES = /users/user_name/proj/lib/auxmat.o )  
