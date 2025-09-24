@@ -13,7 +13,7 @@
 # ----------------------------------------------------------------------
 #
 
-ROOT = /usr/local/pinus/home/gruber/diag_boxmod/src_ia
+ROOT = /home/data/GitHub/Gruber-Diagnostic-Box-Model/src_ia
 
 #
 # ----------------------------------------------------------------------
