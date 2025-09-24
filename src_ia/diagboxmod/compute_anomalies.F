@@ -154,7 +154,7 @@ c --------------------------------------------------------------------
 c     error handling
 c --------------------------------------------------------------------
 c     
- 9900 write(unit,*) '--COMPUTE_ANOMALIES: ',
+ 9900 write(*,*) '--COMPUTE_ANOMALIES: ',
      $     'an error occurred while writing...'
       error = .true.
 c

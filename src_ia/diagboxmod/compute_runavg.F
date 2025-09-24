@@ -197,7 +197,7 @@ c --------------------------------------------------------------------
 c     error handling
 c --------------------------------------------------------------------
 c     
- 9900 write(unit,*) '--COMPUTE_RUNAVG: ',
+ 9900 write(*,*) '--COMPUTE_RUNAVG: ',
      $     'an error occurred while writing...'
       error = .true.
 c
