@@ -80,7 +80,7 @@ c
 c
       integer dashpat,colindx
 c
-      character xlab*6, ylab*9, monthlab(12)*3
+      character xlab*16, ylab*19, monthlab(12)*3
       character str*40
 c
       data monthlab /'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
