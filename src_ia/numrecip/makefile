@@ -165,15 +165,15 @@ clean:
 	@echo " *** removing object files ***"
 	@echo " ***************************************"
 	@echo ""
-	rm -f *.o *% core *.f
+	rm -f *.o *% core *.for
 #
 small:
 	@echo ""
 	@echo " ***************************************"
-	@echo " *** compressing .f and .r files     ***"
+	@echo " *** compressing .for and .r files     ***"
 	@echo " ***************************************"
 	@echo ""
-	compress *.r *.f
+	compress *.r *.for
 #
 big:
 	@echo ""
@@ -202,18 +202,18 @@ LAST_ACTION:
 # -------------------------------------------------------------------------
 
 .SUFFIXES:
-.SUFFIXES: .a .o .f .F
+.SUFFIXES: .a .o .for .F
 
-.F.f: 
+.F.for: 
 	@echo ""
 	@echo " *** PREPROCESSING $<... ***"
-	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.f 
-#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.f
+	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.for 
+#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.for
 
-.f.o:   
+.for.o:   
 	@echo ""
 	@echo " *** COMPILING $<... ***"
-	$(F_C) -c $(F_FLAGS) $*.f -o $*.o
+	$(F_C) -c $(F_FLAGS) $*.for -o $*.o
 
 .o.a:
 	@echo ""
@@ -229,49 +229,49 @@ LAST_ACTION:
 # -------------------------------------------------------------------------
 #
 #
-func.f : func.F  $(H_FILES)
-func.o : func.f
+func.for : func.F  $(H_FILES)
+func.o : func.for
 #
-dfunc.f : dfunc.F  $(H_FILES)
-dfunc.o : dfunc.f
+dfunc.for : dfunc.F  $(H_FILES)
+dfunc.o : dfunc.for
 #
-f1dim.f : f1dim.F
-f1dim.o : f1dim.f
+f1dim.for : f1dim.F
+f1dim.o : f1dim.for
 #
-df1dim.f : df1dim.F
-df1dim.o : df1dim.f
+df1dim.for : df1dim.F
+df1dim.o : df1dim.for
 #
-dbrent.f : dbrent.F
-dbrent.o : dbrent.f
+dbrent.for : dbrent.F
+dbrent.o : dbrent.for
 #
-mnbrak.f : mnbrak.F
-mnbrak.o : mnbrak.f
+mnbrak.for : mnbrak.F
+mnbrak.o : mnbrak.for
 #
-linmin.f : linmin.F
-linmin.o : linmin.f
+linmin.for : linmin.F
+linmin.o : linmin.for
 #
-frprmn.f : frprmn.F
-frprmn.o : frprmn.f
+frprmn.for : frprmn.F
+frprmn.o : frprmn.for
 #
-ran1.f : ran1.F
-ran1.o : ran1.f
+ran1.for : ran1.F
+ran1.o : ran1.for
 #
-gasdev.f : gasdev.F
-gasdev.o : gasdev.f
+gasdev.for : gasdev.F
+gasdev.o : gasdev.for
 #
-calc_hessian.f : calc_hessian.F $(H_FILES)
-calc_hessian.o : calc_hessian.f
+calc_hessian.for : calc_hessian.F $(H_FILES)
+calc_hessian.o : calc_hessian.for
 #
-svdcmp.f : svdcmp.F
-svdcmp.o : svdcmp.f
+svdcmp.for : svdcmp.F
+svdcmp.o : svdcmp.for
 #
-pythag.f : pythag.F
-pythag.o : pythag.f
+pythag.for : pythag.F
+pythag.o : pythag.for
 #
-invert_hessian.f : invert_hessian.F 
-invert_hessian.o : invert_hessian.f
+invert_hessian.for : invert_hessian.F 
+invert_hessian.o : invert_hessian.for
 #
-cost_function.f : cost_function.F $(H_FILES)
-cost_function.o : cost_function.f
+cost_function.for : cost_function.F $(H_FILES)
+cost_function.o : cost_function.for
 #
 $(L) : $(O_FILES)

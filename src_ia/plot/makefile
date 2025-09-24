@@ -136,15 +136,15 @@ clean:
 	@echo " *** removing object files ***"
 	@echo " ***************************************"
 	@echo ""
-	rm -f *.o *% core *.f *.a
+	rm -f *.o *% core *.for *.a
 #
 small:
 	@echo ""
 	@echo " ***************************************"
-	@echo " *** compressing .f and .r files     ***"
+	@echo " *** compressing .for and .r files     ***"
 	@echo " ***************************************"
 	@echo ""
-	compress *.r *.f
+	compress *.r *.for
 #
 big:
 	@echo ""
@@ -173,18 +173,18 @@ LAST_ACTION:
 # -------------------------------------------------------------------------
 
 .SUFFIXES:
-.SUFFIXES: .a .o .f .F
+.SUFFIXES: .a .o .for .F
 
-.F.f: 
+.F.for: 
 	@echo ""
 	@echo " *** PREPROCESSING $<... ***"
-	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.f 
-#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.f
+	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.for 
+#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.for
 
-.f.o:   
+.for.o:   
 	@echo ""
 	@echo " *** COMPILING $<... ***"
-	$(F_C) -c $(F_FLAGS) $*.f -o $*.o
+	$(F_C) -c $(F_FLAGS) $*.for -o $*.o
 
 .o.a:
 	@echo ""
@@ -200,22 +200,22 @@ LAST_ACTION:
 # -------------------------------------------------------------------------
 #
 #
-generate_ncar_plots.f : generate_ncar_plots.F $(H_FILES)
-generate_ncar_plots.o : generate_ncar_plots.f
+generate_ncar_plots.for : generate_ncar_plots.F $(H_FILES)
+generate_ncar_plots.o : generate_ncar_plots.for
 #
-generate_mc_ncar_plots.f : generate_mc_ncar_plots.F $(H_FILES)
-generate_mc_ncar_plots.o : generate_mc_ncar_plots.f
+generate_mc_ncar_plots.for : generate_mc_ncar_plots.F $(H_FILES)
+generate_mc_ncar_plots.o : generate_mc_ncar_plots.for
 #
-plot_results.f : plot_results.F $(H_FILES)
-plot_results.o : plot_results.f
+plot_results.for : plot_results.F $(H_FILES)
+plot_results.o : plot_results.for
 #
-calc_grid.f : calc_grid.F
-calc_grid.o : calc_grid.f
+calc_grid.for : calc_grid.F
+calc_grid.o : calc_grid.for
 #
-bkgroundcolor.f     : bkgroundcolor.F
-bkgroundcolor.o     : bkgroundcolor.f
+bkgroundcolor.for     : bkgroundcolor.F
+bkgroundcolor.o     : bkgroundcolor.for
 #
-simplecolor.f : simplecolor.F
-simplecolor.o : simplecolor.f
+simplecolor.for : simplecolor.F
+simplecolor.o : simplecolor.for
 #
 $(L) : $(O_FILES)

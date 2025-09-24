@@ -120,18 +120,18 @@ all: FIRST_ACTION \
 clean:
 	@echo ""
 	@echo " ***************************************"
-	@echo " *** removing object and *.f files ***"
+	@echo " *** removing object and *.for files ***"
 	@echo " ***************************************"
 	@echo ""
-	rm -f *.o *% *.f core
+	rm -f *.o *% *.for core
 #
 small:
 	@echo ""
 	@echo " ***************************************"
-	@echo " *** compressing .f and .r files     ***"
+	@echo " *** compressing .for and .r files     ***"
 	@echo " ***************************************"
 	@echo ""
-	compress *.r *.f
+	compress *.r *.for
 #
 big:
 	@echo ""
@@ -160,18 +160,18 @@ LAST_ACTION:
 # -------------------------------------------------------------------------
 
 .SUFFIXES:
-.SUFFIXES: .a .o .f .F
+.SUFFIXES: .a .o .for .F
 
-.F.f: 
+.F.for: 
 	@echo ""
 	@echo " *** PREPROCESSING $<... ***"
-	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.f 
-#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.f
+	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.for 
+#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.for
 
-.f.o:   
+.for.o:   
 	@echo ""
 	@echo " *** COMPILING $<... ***"
-	$(F_C) -c $(F_FLAGS) $*.f -o $*.o
+	$(F_C) -c $(F_FLAGS) $*.for -o $*.o
 
 .o.a:
 	@echo ""
@@ -186,22 +186,22 @@ LAST_ACTION:
 #          indicated together with the path
 # -------------------------------------------------------------------------
 #
-vp_purewater.f : vp_purewater.F
-vp_purewater.o : vp_purewater.f
+vp_purewater.for : vp_purewater.F
+vp_purewater.o : vp_purewater.for
 #
-vp_seawater.f : vp_seawater.F
-vp_seawater.o : vp_seawater.f
+vp_seawater.for : vp_seawater.F
+vp_seawater.o : vp_seawater.for
 #
-schmidt_number.f : schmidt_number.F
-schmidt_number.o : schmidt_number.f
+schmidt_number.for : schmidt_number.F
+schmidt_number.o : schmidt_number.for
 #
-chem.f : chem.F
-chem.o : chem.f
+chem.for : chem.F
+chem.o : chem.for
 #
-calcco2.f : calcco2.F
-calcco2.o : calcco2.f
+calcco2.for : calcco2.F
+calcco2.o : calcco2.for
 #
-estimate.f : estimate.F
-estimate.o : estimate.f
+estimate.for : estimate.F
+estimate.o : estimate.for
 #
 $(L) : $(O_FILES)

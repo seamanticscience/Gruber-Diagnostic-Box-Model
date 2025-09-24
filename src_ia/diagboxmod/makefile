@@ -230,15 +230,15 @@ clean:
 	@echo " *** removing object files ***"
 	@echo " ***************************************"
 	@echo ""
-	rm -f *.o *% core *.f *.a
+	rm -f *.o *% core *.for *.a
 #
 small:
 	@echo ""
 	@echo " ***************************************"
-	@echo " *** compressing .f and .r files     ***"
+	@echo " *** compressing .for and .r files     ***"
 	@echo " ***************************************"
 	@echo ""
-	compress *.r *.f
+	compress *.r *.for
 #
 big:
 	@echo ""
@@ -267,18 +267,18 @@ LAST_ACTION:
 # -------------------------------------------------------------------------
 
 .SUFFIXES:
-.SUFFIXES: .a .o .f .F
+.SUFFIXES: .a .o .for .F
 
-.F.f: 
+.F.for: 
 	@echo ""
 	@echo " *** PREPROCESSING $<... ***"
-	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.f 
-#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.f
+	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.for 
+#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.for
 
-.f.o:   
+.for.o:   
 	@echo ""
 	@echo " *** COMPILING $<... ***"
-	$(F_C) -c $(F_FLAGS) $*.f -o $*.o
+	$(F_C) -c $(F_FLAGS) $*.for -o $*.o
 
 .o.a:
 	@echo ""
@@ -292,143 +292,143 @@ LAST_ACTION:
 #          indicated together with the path
 # -------------------------------------------------------------------------
 #
-userinput.f : userinput.F $(H_FILES)
-userinput.o : userinput.f
+userinput.for : userinput.F $(H_FILES)
+userinput.o : userinput.for
 #
-intro.f : intro.F
-intro.o : intro.f
+intro.for : intro.F
+intro.o : intro.for
 #
-init_params.f : init_params.F
-init_params.o : init_params.f
+init_params.for : init_params.F
+init_params.o : init_params.for
 #
-run_simulation.f : run_simulation.F  $(H_FILES)
-run_simulation.o : run_simulation.f
+run_simulation.for : run_simulation.F  $(H_FILES)
+run_simulation.o : run_simulation.for
 #
-assign_params.f : assign_params.F $(H_FILES)
-assign_params.o : assign_params.f 
+assign_params.for : assign_params.F $(H_FILES)
+assign_params.o : assign_params.for 
 #
-set_intval_to_zero.f : set_intval_to_zero.F $(H_FILES)
-set_intval_to_zero.o : set_intval_to_zero.f
+set_intval_to_zero.for : set_intval_to_zero.F $(H_FILES)
+set_intval_to_zero.o : set_intval_to_zero.for
 #
-set_sums_to_zero.f : set_sums_to_zero.F $(H_FILES)
-set_sums_to_zero.o : set_sums_to_zero.f
+set_sums_to_zero.for : set_sums_to_zero.F $(H_FILES)
+set_sums_to_zero.o : set_sums_to_zero.for
 #
-init_val.f : init_val.F $(H_FILES)
-init_val.o : init_val.f
+init_val.for : init_val.F $(H_FILES)
+init_val.o : init_val.for
 #
-input.f : input.F $(H_FILES)
-input.o : input.f
+input.for : input.F $(H_FILES)
+input.o : input.for
 #
-gasexchange.f : gasexchange.F $(H_FILES)
-gasexchange.o : gasexchange.f
+gasexchange.for : gasexchange.F $(H_FILES)
+gasexchange.o : gasexchange.for
 #
-vert_diff.f : vert_diff.F $(H_FILES)
-vert_diff.o : vert_diff.f
+vert_diff.for : vert_diff.F $(H_FILES)
+vert_diff.o : vert_diff.for
 #
-intvertgrad_ent.f : intvertgrad_ent.F $(H_FILES)
-intvertgrad_ent.o : intvertgrad_ent.f
+intvertgrad_ent.for : intvertgrad_ent.F $(H_FILES)
+intvertgrad_ent.o : intvertgrad_ent.for
 #
-masscons_ent.f : masscons_ent.F $(H_FILES)
-masscons_ent.o : masscons_ent.f
+masscons_ent.for : masscons_ent.F $(H_FILES)
+masscons_ent.o : masscons_ent.for
 #
-episevent_ent.f : episevent_ent.F $(H_FILES)
-episevent_ent.o : episevent_ent.f
+episevent_ent.for : episevent_ent.F $(H_FILES)
+episevent_ent.o : episevent_ent.for
 #
-matear_ent.f : matear_ent.F $(H_FILES)
-matear_ent.o : matear_ent.f 
+matear_ent.for : matear_ent.F $(H_FILES)
+matear_ent.o : matear_ent.for 
 #
-advection1.f : advection1.F $(H_FILES)
-advection1.o : advection1.f
+advection1.for : advection1.F $(H_FILES)
+advection1.o : advection1.for
 #
-advection2.f : advection2.F $(H_FILES)
-advection2.o : advection2.f
+advection2.for : advection2.F $(H_FILES)
+advection2.o : advection2.for
 #
-net_comm_prod.f : net_comm_prod.F $(H_FILES)
-net_comm_prod.o : net_comm_prod.f
+net_comm_prod.for : net_comm_prod.F $(H_FILES)
+net_comm_prod.o : net_comm_prod.for
 #
-calc_int_val.f : calc_int_val.F $(H_FILES)
-calc_int_val.o : calc_int_val.f
+calc_int_val.for : calc_int_val.F $(H_FILES)
+calc_int_val.o : calc_int_val.for
 #
-calc_run_stat.f : calc_run_stat.F $(H_FILES)
-calc_run_stat.o : calc_run_stat.f
+calc_run_stat.for : calc_run_stat.F $(H_FILES)
+calc_run_stat.o : calc_run_stat.for
 #
-calc_mc_statistics.f : calc_mc_statistics.F $(H_FILES)
-calc_mc_statistics.o : calc_mc_statistics.f
+calc_mc_statistics.for : calc_mc_statistics.F $(H_FILES)
+calc_mc_statistics.o : calc_mc_statistics.for
 #
-keep_mc_statistics.f : keep_mc_statistics.F $(H_FILES)
-keep_mc_statistics.o : keep_mc_statistics.f
+keep_mc_statistics.for : keep_mc_statistics.F $(H_FILES)
+keep_mc_statistics.o : keep_mc_statistics.for
 #
-write_std_output.f : write_std_output.F $(H_FILES)
-write_std_output.o : write_std_output.f
+write_std_output.for : write_std_output.F $(H_FILES)
+write_std_output.o : write_std_output.for
 #
-write_op_output.f : write_op_output.F $(H_FILES)
-write_op_output.o : write_op_output.f
+write_op_output.for : write_op_output.F $(H_FILES)
+write_op_output.o : write_op_output.for
 #
-write_mc_output.f : write_mc_output.F $(H_FILES)
-write_mc_output.o : write_mc_output.f
+write_mc_output.for : write_mc_output.F $(H_FILES)
+write_mc_output.o : write_mc_output.for
 #
-write_sn_output.f : write_sn_output.F $(H_FILES)
-write_sn_output.o : write_sn_output.f
+write_sn_output.for : write_sn_output.F $(H_FILES)
+write_sn_output.o : write_sn_output.for
 #
-write_rates_tofile.f : write_rates_tofile.F $(H_FILES)
-write_rates_tofile.o : write_rates_tofile.f
+write_rates_tofile.for : write_rates_tofile.F $(H_FILES)
+write_rates_tofile.o : write_rates_tofile.for
 #
-write_solution_tofile.f : write_solution_tofile.F $(H_FILES)
-write_solution_tofile.o : write_solution_tofile.f
+write_solution_tofile.for : write_solution_tofile.F $(H_FILES)
+write_solution_tofile.o : write_solution_tofile.for
 #
-write_fluxes_tofile.f : write_fluxes_tofile.F $(H_FILES)
-write_fluxes_tofile.o : write_fluxes_tofile.f
+write_fluxes_tofile.for : write_fluxes_tofile.F $(H_FILES)
+write_fluxes_tofile.o : write_fluxes_tofile.for
 #
-write_mc_rates_tofile.f : write_mc_rates_tofile.F $(H_FILES)
-write_mc_rates_tofile.o : write_mc_rates_tofile.f
+write_mc_rates_tofile.for : write_mc_rates_tofile.F $(H_FILES)
+write_mc_rates_tofile.o : write_mc_rates_tofile.for
 #
-write_mc_fluxes_tofile.f : write_mc_fluxes_tofile.F $(H_FILES)
-write_mc_fluxes_tofile.o : write_mc_fluxes_tofile.f
+write_mc_fluxes_tofile.for : write_mc_fluxes_tofile.F $(H_FILES)
+write_mc_fluxes_tofile.o : write_mc_fluxes_tofile.for
 #
-write_obs_tofile.f : write_obs_tofile.F $(H_FILES)
-write_obs_tofile.o : write_obs_tofile.f
+write_obs_tofile.for : write_obs_tofile.F $(H_FILES)
+write_obs_tofile.o : write_obs_tofile.for
 #
-write_rateanomalies_tofile.f : write_rateanomalies_tofile.F $(H_FILES)
-write_rateanomalies_tofile.o : write_rateanomalies_tofile.f
+write_rateanomalies_tofile.for : write_rateanomalies_tofile.F $(H_FILES)
+write_rateanomalies_tofile.o : write_rateanomalies_tofile.for
 #
-write_fluxanomalies_tofile.f :  write_fluxanomalies_tofile.F $(H_FILES)
-write_fluxanomalies_tofile.o :  write_fluxanomalies_tofile.f
+write_fluxanomalies_tofile.for :  write_fluxanomalies_tofile.F $(H_FILES)
+write_fluxanomalies_tofile.o :  write_fluxanomalies_tofile.for
 #
-write_mc_fluxanomalies_tofile.f :  write_mc_fluxanomalies_tofile.F $(H_FILES)
-write_mc_fluxanomalies_tofile.o :  write_mc_fluxanomalies_tofile.f
+write_mc_fluxanomalies_tofile.for :  write_mc_fluxanomalies_tofile.F $(H_FILES)
+write_mc_fluxanomalies_tofile.o :  write_mc_fluxanomalies_tofile.for
 #
-compute_anomalies.f : compute_anomalies.F $(H_FILES)
-compute_anomalies.o : compute_anomalies.f
+compute_anomalies.for : compute_anomalies.F $(H_FILES)
+compute_anomalies.o : compute_anomalies.for
 #
-compute_runavg.f : compute_runavg.F $(H_FILES)
-compute_runavg.o : compute_runavg.f
+compute_runavg.for : compute_runavg.F $(H_FILES)
+compute_runavg.o : compute_runavg.for
 #
-compute_mc_runavg.f : compute_mc_runavg.F $(H_FILES)
-compute_mc_runavg.o : compute_mc_runavg.f
+compute_mc_runavg.for : compute_mc_runavg.F $(H_FILES)
+compute_mc_runavg.o : compute_mc_runavg.for
 #
-harmonic.f : harmonic.F
-harmonic.o : harmonic.f
+harmonic.for : harmonic.F
+harmonic.o : harmonic.for
 #
-rates_to_fluxes.f : rates_to_fluxes.F
-rates_to_fluxes.o : rates_to_fluxes.f
+rates_to_fluxes.for : rates_to_fluxes.F
+rates_to_fluxes.o : rates_to_fluxes.for
 #
-fluxes_to_rates.f : fluxes_to_rates.F
-fluxes_to_rates.o : fluxes_to_rates.f
+fluxes_to_rates.for : fluxes_to_rates.F
+fluxes_to_rates.o : fluxes_to_rates.for
 #
-delta_to_ratio.f : delta_to_ratio.F
-delta_to_ratio.o : delta_to_ratio.f
+delta_to_ratio.for : delta_to_ratio.F
+delta_to_ratio.o : delta_to_ratio.for
 #
-c13_to_delta.f : c13_to_delta.F
-c13_to_delta.o : c13_to_delta.f
+c13_to_delta.for : c13_to_delta.F
+c13_to_delta.o : c13_to_delta.for
 #
-delta_to_c13.f : delta_to_c13.F
-delta_to_c13.o : delta_to_c13.f
+delta_to_c13.for : delta_to_c13.F
+delta_to_c13.o : delta_to_c13.for
 #
-spline.f : spline.F
-spline.o : spline.f
+spline.for : spline.F
+spline.o : spline.for
 #
-iplin.f : iplin.F
-iplin.o : iplin.f
+iplin.for : iplin.F
+iplin.o : iplin.for
 #
 $(L) : $(O_FILES)
 

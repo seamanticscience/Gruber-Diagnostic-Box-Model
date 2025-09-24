@@ -99,12 +99,12 @@ H_FILES = \
 	${I_PATH}/sensitivity.h  
 #
 I_FILES_DEBUG = \
-	diagboxmod/run_simulation.f    diagboxmod/gasexchange.f        \
-	diagboxmod/vert_diff.f         diagboxmod/intvertgrad_ent.f    \
-	diagboxmod/masscons_ent.f      diagboxmod/episevent_ent.f      \
-	diagboxmod/advection.f         diagboxmod/net_comm_prod.f      \
-	diagboxmod/input.f             diagboxmod/advection1.f         \
-	diagboxmod/advection2.f        diagboxmod/matear_ent.f
+	diagboxmod/run_simulation.for    diagboxmod/gasexchange.for        \
+	diagboxmod/vert_diff.for         diagboxmod/intvertgrad_ent.for    \
+	diagboxmod/masscons_ent.for      diagboxmod/episevent_ent.for      \
+	diagboxmod/advection.for         diagboxmod/net_comm_prod.for      \
+	diagboxmod/input.for             diagboxmod/advection1.for         \
+	diagboxmod/advection2.for        diagboxmod/matear_ent.for
 # 
 X_FILES = diag_boxmodel_ia.x
 #
@@ -178,28 +178,28 @@ clean_debug:
 # -------------------------------------------------------------------------
 
 .SUFFIXES:
-.SUFFIXES: .x .o .f .F
+.SUFFIXES: .x .o .for .F
 
-.f.x:
+.for.x:
 	@echo ""
 	@echo " *** COMPILING AND LINKING $<... ***"
 	$(NCARF_C) $(F_FLAGS) $< -o $@ \
                $(O_FILES) $(EXT_O_FILES) \
                $(EXT_LIB) $(INT_LIB)
-	-rm -f $*.o $*.f
+	-rm -f $*.o $*.for
 
-.F.f: 
+.F.for: 
 	@echo ""
 	@echo " *** PREPROCESSING $<... ***"
-	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.f 
-#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.f 
+	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.for 
+#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.for 
 
-.f.o:   
+.for.o:   
 	@echo ""
 	@echo " *** COMPILING $<... ***"
-	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.f 
-#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.f 
-#	$(F_C) -c $(F_FLAGS) $*.f -o $*.o
+	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -E $< > $*.for 
+#	$(F_C) $(D_FLAGS) $(F_FLAGS) -I$(I_PATH) -P $< -o $*.for 
+#	$(F_C) -c $(F_FLAGS) $*.for -o $*.o
 
 # -------------------------------------------------------------------------
 # -- Dependencies (explicit) 
@@ -208,5 +208,5 @@ clean_debug:
 # -------------------------------------------------------------------------
 #
 #
-diag_boxmodel_ia.f : diag_boxmodel_ia.F $(H_FILES)  ${I_PATH}/init_params.h
-diag_boxmodel_ia.o : diag_boxmodel_ia.f
+diag_boxmodel_ia.for : diag_boxmodel_ia.F $(H_FILES)  ${I_PATH}/init_params.h
+diag_boxmodel_ia.o : diag_boxmodel_ia.for
