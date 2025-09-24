@@ -179,6 +179,7 @@ c
       double precision d_dc13_calc,D_c13_calc
       double precision dc13_tmp,r_prc
       double precision sum,sum_c13
+      double precision ratio,denom,denom2
 c
 c =====================================================================
 c     begin of executable code
@@ -252,7 +253,7 @@ c     for debugging purposes
 c -----------------------------------------------------------------------
 c
 #ifdef debugging
-         if (mod(k,90) .eq. 0) then
+C         if (mod(k,90) .eq. 0) then
             write(*,*) '--RUN_SIMULATiON: time = ',time
             write(*,*) '   k             : ',k 
             write(*,*) '   temp,sal      : ',temp,sal
@@ -262,7 +263,7 @@ c
             write(*,*) '   dc13atm,ws    : ',dc13_a,ws
             write(*,*) '   kz,h          : ',kz_var,h
             write(*,*) '   hnew,hold     : ',h_new,h_old
-         endif
+C         endif
 #endif
 c     
 c
@@ -457,6 +458,17 @@ c
 c ---------------------------------------------------------------------
 c     calculate dC13 values of the five processes
 c ---------------------------------------------------------------------
+CJML Fix floating point exceptions
+CJML         do i = 1,4
+CJML            if ((D_C(i,k) .ne. 0.d0) .and. 
+CJML     $           (D_C13(i,k)/D_C(i,k) .ne. 1.d0)) then
+CJML               nsum_dc13_prc(i) = nsum_dc13_prc(i) + 1
+CJML               r_prc = (D_C13(i,k)/D_C(i,k)) / 
+CJML     $              (1-(D_C13(i,k)/D_C(i,k)))
+CJML               dc13_tmp = (r_prc/r_std - 1.d0) * 1.d3
+CJML               sum_dc13_prc(i) = sum_dc13_prc(i) + dc13_tmp
+CJML            endif
+CJML         enddo
 c
          do i = 1,4
             denom = D_C(i,k)
@@ -465,23 +477,14 @@ c
                if (abs(ratio-1.d0) > 10.d0*epsilon(1.d0)) then
                   nsum_dc13_prc(i) = nsum_dc13_prc(i) + 1
                   denom2 = 1.d0 - ratio
-                  denom2 = sign(max(abs(denom2), 10.d0*tiny(1.d0)), denom2)
+                  denom2 = sign(max(abs(denom2), 10.d0*tiny(1.d0)),
+     $                           denom2)
                   r_prc = ratio / denom2
                   dc13_tmp = (r_prc/r_std - 1.d0) * 1.d3
                   sum_dc13_prc(i) = sum_dc13_prc(i) + dc13_tmp
                endif
             endif
          enddo
-C         do i = 1,4
-C            if ((D_C(i,k) .ne. 0.d0) .and. 
-C     $           (D_C13(i,k)/D_C(i,k) .ne. 1.d0)) then
-C               nsum_dc13_prc(i) = nsum_dc13_prc(i) + 1
-C               r_prc = (D_C13(i,k)/D_C(i,k)) / 
-C     $              (1-(D_C13(i,k)/D_C(i,k)))
-C               dc13_tmp = (r_prc/r_std - 1.d0) * 1.d3
-C               sum_dc13_prc(i) = sum_dc13_prc(i) + dc13_tmp
-C            endif
-C         enddo
 c
 c ---------------------------------------------------------------------
 c     for debugging purposes
@@ -489,7 +492,7 @@ c ---------------------------------------------------------------------
 c
 #ifdef debugging
 
-         if (mod(k,90) .eq. 0) then
+C         if (mod(k,90) .eq. 0) then
             write(*,9000) time,k
  9000       format(/'--RUN_SIMULATION: for debugging '/
      $              '      time : ',f6.1/
@@ -585,7 +588,7 @@ c         write(*,*) 'D_C_sim : ',D_C(5,k)
 c         write(*,*) 'D_C13_obs : ',c13_new - c13_old
 c         write(*,*) 'D_dc13_obs : ',dc13_new - dc13_old
 c         write(*,*)
-         endif
+C         endif
 #endif
 c
 c ---------------------------------------------------------------------
