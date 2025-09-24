@@ -87,7 +87,7 @@ c --------------------------------------------------------------------
 c     determine the number of analysis years 
 c --------------------------------------------------------------------
 c        
-      nyears = dint(tend - tstart)
+      nyears = int(tend - tstart)
 c
 c --------------------------------------------------------------------
 c     set the numbers of time steps in an analysis year to zero
@@ -112,7 +112,7 @@ c      operation
 c      keep track of how many time steps there are in an analysis year
 c --------------------------------------------------------------------
 c        
-         iyr = dint(time + eps - tstart - year_start) + 1
+         iyr = int(time + eps - tstart - year_start) + 1
          nstep_yr(iyr) = nstep_yr(iyr) + 1
 c         if (abs(time - nint(time)) .le. 0.0025) then
 c            write(*,*) '--CALC_INT_VAL, time = ',time
