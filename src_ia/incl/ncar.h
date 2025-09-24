@@ -48,7 +48,7 @@ c=====================================================================
 c
       character plottype*2
       character tickformat(2)*7
-      character axislabel(2)*40
+      character axislabel(2)*10
       real yplot(2),xplot(2)
 c
       logical xautoscale,yautoscale,colored
@@ -59,7 +59,7 @@ c
 c
       integer nticks(2,2)
 c
-      character title*50,subtitle*50
+      character title*60,subtitle*50
 c
       logical auto_style
       integer line_color(nsetmax),line_dashpat(nsetmax)
