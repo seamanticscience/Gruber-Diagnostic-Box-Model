@@ -547,7 +547,7 @@ c
 c
             write(*,'(/A/)') ' monte carlo parameters : '
 c     
-            write(*,'(4(a9,x)/)') 
+            write(*,'(4(a9,1x)/)') 
      $           'parameter',
      $           'initial  ',
      $           '1-sg     ',

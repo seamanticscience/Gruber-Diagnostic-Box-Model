@@ -159,7 +159,7 @@ c
       write(unit,'(/A/)')' optimization of parameters :'
 c
       do np = 1,nparams
-         write(unit,'(A,i2,x,a,g10.4,a,g10.4)')
+         write(unit,'(A,i2,1x,a,g10.4,a,g10.4)')
      $        '    parameter : ',np,';  initial : ',p_init(np),
      $        ';  optimized : ',sg_p(np)*p_opt(np) + p_init(np)
       enddo
@@ -246,11 +246,11 @@ c
       write(unit,'(/2A/)') ' hessian matrix ',
      $     '(d2J/(dx_i dx_j)) : '
 c
-      write(unit,'(10x,10(8x,i2,x))')(j,j=1,nparams)
+      write(unit,'(10x,10(8x,i2,1x))')(j,j=1,nparams)
 c
 
       do i = 1,nparams
-         write(unit,'(a6,i2,2x,10(g10.4,x))')
+         write(unit,'(a6,i2,2x,10(g10.4,1x))')
      $        'row : ',i,(hessian(i,j),j=1,nparams)
       enddo      
 c
@@ -263,11 +263,11 @@ c
       write(unit,'(/2A/)') ' covariance matrix ',
      $     '(inverse of hessian matrix) : '
 c
-      write(unit,'(10x,10(8x,i2,x))')(j,j=1,nparams)
+      write(unit,'(10x,10(8x,i2,1x))')(j,j=1,nparams)
 c
 
       do i = 1,nparams
-         write(unit,'(a6,i2,2x,10(g10.4,x))')
+         write(unit,'(a6,i2,2x,10(g10.4,1x))')
      $        'row : ',i,(covm(i,j),j=1,nparams)
       enddo      
 c
@@ -279,7 +279,7 @@ c
 c
       write(unit,'(/A/)') ' correlation matrix :'
 c
-      write(unit,'(10x,10(3x,i2,x))')(j,j=1,nparams)
+      write(unit,'(10x,10(3x,i2,1x))')(j,j=1,nparams)
 c
       do i = 1,nparams
          do j = 1,nparams
@@ -291,7 +291,7 @@ c
                corr(i,j) = -99.99
             endif
          enddo
-         write(unit,'(a6,i2,2x,10(f7.3,x))')
+         write(unit,'(a6,i2,2x,10(f7.3,1x))')
      $        'row : ',i,(corr(i,j),j=1,nparams)
       enddo      
 c

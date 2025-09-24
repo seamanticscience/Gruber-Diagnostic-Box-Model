@@ -412,7 +412,7 @@ c
 c
       write(unit,'(/A/)') ' monte carlo parameters : '
 c
-      write(unit,'(4(a9,x)/)') 
+      write(unit,'(4(a9,1x)/)') 
      $     'parameter',
      $     'initial  ',
      $     '1-sg     ',
@@ -487,7 +487,7 @@ c
 
          do i=1,nproc_fluxes
             do ny = i1,i2
-               write(tmp(ny),'(2x,F7.2,x,F5.2)') 
+               write(tmp(ny),'(2x,F7.2,1x,F5.2)') 
      $              int_fluxes_std(ny,i),sg_int_fluxes(ny,i)
             enddo
             write(unit,9200) proc_fluxes_name(i),
@@ -518,7 +518,7 @@ c
 c
 c         do i=1,nproc_fluxes
 c            do ny = i1,i2
-c               write(tmp(ny),'(2x,F7.2,x,F5.2)') 
+c               write(tmp(ny),'(2x,F7.2,1x,F5.2)') 
 c     $              int_fluxes_std(ny,i),wsg_int_fluxes(ny,i)
 c            enddo
 c            write(unit,9200) proc_fluxes_name(i),
@@ -557,7 +557,7 @@ c
 c
       write(unit,'(A)') '         Average  1-sg Uncertainty'
       do i=1,nproc_fluxes
-         write(unit,'(2x,a4,2x,f7.2,x,f5.2)') 
+         write(unit,'(2x,a4,2x,f7.2,1x,f5.2)') 
      $        proc_fluxes_name(i),avg_int_fluxes(i),
      $         avg_sg_int_fluxes(i)
       enddo
@@ -582,7 +582,7 @@ c
          write(unit,9100) (int(tstart)+ny-1, ny=i1,i2)
          do i=1,nproc_fluxes
             do ny = i1,i2
-               write(tmp(ny),'(2x,F7.2,x,F5.2)') 
+               write(tmp(ny),'(2x,F7.2,1x,F5.2)') 
      $           (int_fluxes_std(ny,i)-avg_int_fluxes(i)),
      $           sg_int_fluxes(ny,i)
             enddo
@@ -614,7 +614,7 @@ c
 
          do i=1,nproc_rates
             do ny = i1,i2
-               write(tmp(ny),'(2x,F7.1,x,F5.1)') 
+               write(tmp(ny),'(2x,F7.1,1x,F5.1)') 
      $              int_rates_std(ny,i),sg_int_rates(ny,i)
             enddo
             write(unit,9300) proc_fluxes_name(i),
@@ -643,7 +643,7 @@ c
 c
 c         do i=1,nproc_rates
 c            do ny = i1,i2
-c               write(tmp(ny),'(2x,F7.1,x,F5.1)') 
+c               write(tmp(ny),'(2x,F7.1,1x,F5.1)') 
 c     $              int_rates_std(ny,i),wsg_int_rates(ny,i)
 c            enddo
 c            write(unit,9300) proc_rates_name(i),
@@ -684,7 +684,7 @@ c
 c
       write(unit,'(A)') '         Average  1-sg Uncertainty'
       do i=1,nproc_rates
-         write(unit,'(2x,a4,2x,f7.2,x,f5.2)') 
+         write(unit,'(2x,a4,2x,f7.2,1x,f5.2)') 
      $        proc_rates_name(i),avg_int_rates(i),
      $         avg_sg_int_rates(i)
       enddo
@@ -709,7 +709,7 @@ c
          write(unit,9100) (int(tstart)+ny-1, ny=i1,i2)
          do i=1,nproc_rates
             do ny = i1,i2
-               write(tmp(ny),'(2x,F7.2,x,F5.2)') 
+               write(tmp(ny),'(2x,F7.2,1x,F5.2)') 
      $           (int_rates_std(ny,i)-avg_int_rates(i)),
      $           sg_int_rates(ny,i)
             enddo
@@ -730,7 +730,7 @@ c
       open(30,file="int_rate_mc_anomalies.set")
       do ny = 1,nyears
          do i = 1,nproc_rates
-            write(tmp2(i),'(2x,F8.3,x,F8.3,x,F8.3)') 
+            write(tmp2(i),'(2x,F8.3,1x,F8.3,1x,F8.3)') 
      $           int_rates_std(ny,i)-avg_int_rates(i),
      $           int_rates_std(ny,i)-avg_int_rates(i)
      $           +sg_int_rates(ny,i),
@@ -746,7 +746,7 @@ c
       open(32,file="int_flux_mc_anomalies.set")
       do ny = 1,nyears
          do i = 1,nproc_fluxes
-            write(tmp2(i),'(2x,F8.3,x,F8.3,x,F8.3)') 
+            write(tmp2(i),'(2x,F8.3,1x,F8.3,1x,F8.3)') 
      $           int_fluxes_std(ny,i)-avg_int_fluxes(i),
      $           int_fluxes_std(ny,i)-avg_int_fluxes(i)
      $           +sg_int_fluxes(ny,i),
