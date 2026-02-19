@@ -71,6 +71,8 @@ c
       character*45 fco2o_spline_file
       character*45 dc13a_spline_file,pco2a_spline_file
       character*45 kz_spline_file,dcdz_spline_file
+
+c     print chosen spline files to terminal
 c
 #ifdef const_splines
       data sdic_spline_file /'splines/sdic_spl_stas_83-99.dat'/
@@ -121,7 +123,7 @@ c
       data dcdz_spline_file 
      $     /'splines/ddicdz_bats_1-156_res_spline.out'/
       data h_spline_file 
-     $     /'splines/mld_ts_stas_bats_1-156_res_spline.out'/
+     $     /'splines/mld_ts_stas_bats_1-156_res_spline.out'/-
 c
 c     not updated on May 3, 2002
 c
@@ -153,6 +155,19 @@ c
          
          eof = .false.
          write(*,*) '--SPLINE: getting splinefit data from files...'
+        write(*,*) '--SPLINE: chosen spline files:'
+        write(*,*) '  sdic  : ', trim(sdic_spline_file)
+        write(*,*) '  salk  : ', trim(salk_spline_file)
+        write(*,*) '  dc13  : ', trim(dc13_spline_file)
+        write(*,*) '  temp  : ', trim(temp_spline_file)
+        write(*,*) '  sal   : ', trim(sal_spline_file)
+        write(*,*) '  fco2o : ', trim(fco2o_spline_file)
+        write(*,*) '  ws    : ', trim(ws_spline_file)
+        write(*,*) '  h     : ', trim(h_spline_file)
+        write(*,*) '  dc13a : ', trim(dc13a_spline_file)
+        write(*,*) '  pco2a : ', trim(pco2a_spline_file)
+        write(*,*) '  kz    : ', trim(kz_spline_file)
+        write(*,*) '  dcdz  : ', trim(dcdz_spline_file)
 c         
 c --------------------------------------------------------------------
 c     check for all files
