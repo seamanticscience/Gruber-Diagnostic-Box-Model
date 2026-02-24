@@ -123,7 +123,7 @@ c
       data dcdz_spline_file 
      $     /'splines/ddicdz_bats_1-156_res_spline.out'/
       data h_spline_file 
-     $     /'splines/mld_ts_stas_bats_1-156_res_spline.out'/-
+     $     /'splines/mld_ts_stas_bats_1-156_res_spline.out'/
 c
 c     not updated on May 3, 2002
 c
