@@ -13,7 +13,7 @@
 # ----------------------------------------------------------------------
 #
 
-ROOT = /home/data/GitHub/Gruber-Diagnostic-Box-Model/src_ia
+#ROOT = ${HOME}/GitHub/Gruber-Diagnostic-Box-Model/src_ia
 
 #
 # ----------------------------------------------------------------------
@@ -49,7 +49,7 @@ include $(ROOT)/ifdefs
 F_C      = gfortran
 #F_C      = lf95
 #
-F_FLAGS  = -C -g  -fbacktrace -O0 -finit-real=snan -finit-integer=-2147483648 -fno-automatic -std=legacy -cpp -I/home/data/Gruber-Box-Model-2/src_ia/incl -fcheck=all -finit-real=nan -ffpe-trap=invalid,zero,overflow -Wall -Wextra -Wno-compare-reals -Wno-unused-label -Wno-unused-variable -Wno-unused-dummy-argument -Wno-unused-parameter -Wno-line-truncation -Wno-cpp
+F_FLAGS  = -C -g  -fbacktrace -O0 -finit-real=snan -finit-integer=-2147483648 -fno-automatic -std=legacy -cpp -I$(ROOT)/incl -fcheck=all -finit-real=nan -ffpe-trap=invalid,zero,overflow -Wall -Wextra -Wno-compare-reals -Wno-unused-label -Wno-unused-variable -Wno-unused-dummy-argument -Wno-unused-parameter -Wno-line-truncation -Wno-cpp
 
 LFLAGS = -s
 
@@ -321,6 +321,9 @@ input.o : input.for
 #
 gasexchange.for : gasexchange.F $(H_FILES)
 gasexchange.o : gasexchange.for
+#
+getdate.for : getdate.F $(H_FILES)
+getdate.o : getdate.for
 #
 vert_diff.for : vert_diff.F $(H_FILES)
 vert_diff.o : vert_diff.for

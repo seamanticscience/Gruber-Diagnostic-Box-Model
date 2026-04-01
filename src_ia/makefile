@@ -12,8 +12,10 @@
 # ----------------------------------------------------------------------
 #
 
-ROOT = /home/data/GitHub/Gruber-Diagnostic-Box-Model/src_ia
+#ROOT = ${HOME}/GitHub/Gruber-Diagnostic-Box-Model/src_ia
+ROOT = $(CURDIR)
 
+export ROOT
 #
 # ----------------------------------------------------------------------
 # -- File containing list of CPP define directives
@@ -28,12 +30,14 @@ include $(ROOT)/ifdefs
 # -------------------------------------------------------------------------
 
 F_C      = gfortran
+#AR = /usr/bin/ar
+#RANLIB = /usr/bin/ranlib
 NCARF_C = ncargf90
 !F_C = lf95
 !NCARF_C = ncarglf95
 #
 #F_FLAGS  = 
-F_FLAGS  = -C -g  -fbacktrace -O0 -finit-real=snan -finit-integer=-2147483648 -fno-automatic -std=legacy -cpp -I/home/data/Gruber-Box-Model-2/src_ia/incl -fcheck=all -finit-real=nan -ffpe-trap=invalid,zero,overflow -Wall -Wextra -Wno-compare-reals -Wno-unused-label -Wno-unused-variable -Wno-unused-dummy-argument -Wno-unused-parameter -Wno-line-truncation -Wno-cpp
+F_FLAGS  = -C -g  -fbacktrace -O0 -finit-real=snan -finit-integer=-2147483648 -fno-automatic -std=legacy -cpp -I$(ROOT)/incl -fcheck=all -finit-real=nan -ffpe-trap=invalid,zero,overflow -Wall -Wextra -Wno-compare-reals -Wno-unused-label -Wno-unused-variable -Wno-unused-dummy-argument -Wno-unused-parameter -Wno-line-truncation -Wno-cpp
 # -------------------------------------------------------------------------
 # -- EXTERNAL OBJECTS FILES:
 # -- example: ( EXT_O_FILES = /users/user_name/proj/lib/auxmat.o )  
@@ -170,8 +174,7 @@ clean_debug:
 	@echo " *** CLEANING UP... ***"            
 	-rm -f $(I_FILES_DEBUG)
 	@echo " *** DONE ***"            
- 
-
+          
 # -------------------------------------------------------------------------
 # -- Default Rules and Suffixes
 # -------------------------------------------------------------------------

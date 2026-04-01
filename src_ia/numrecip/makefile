@@ -13,7 +13,7 @@
 # ----------------------------------------------------------------------
 #
 
-ROOT = /home/data/GitHub/Gruber-Diagnostic-Box-Model/src_ia
+#ROOT = ${HOME}/GitHub/Gruber-Diagnostic-Box-Model/src_ia
 
 #
 # ----------------------------------------------------------------------
@@ -49,7 +49,7 @@ include $(ROOT)/ifdefs
 F_C      = gfortran
 !F_C      = lf95
 #
-F_FLAGS  = -C -g  -fbacktrace -O0 -finit-real=snan -finit-integer=-2147483648 -fno-automatic -std=legacy -cpp -I/home/data/Gruber-Box-Model-2/src_ia/incl -fcheck=all -finit-real=nan -ffpe-trap=invalid,zero,overflow -Wall -Wextra -Wno-compare-reals -Wno-unused-label -Wno-unused-variable -Wno-unused-dummy-argument -Wno-unused-parameter -Wno-line-truncation -Wno-cpp
+F_FLAGS  = -C -g  -fbacktrace -O0 -finit-real=snan -finit-integer=-2147483648 -fno-automatic -std=legacy -cpp -I$(ROOT)/incl -fcheck=all -finit-real=nan -ffpe-trap=invalid,zero,overflow -Wall -Wextra -Wno-compare-reals -Wno-unused-label -Wno-unused-variable -Wno-unused-dummy-argument -Wno-unused-parameter -Wno-line-truncation -Wno-cpp
 
 LFLAGS = -s
 
@@ -165,7 +165,7 @@ clean:
 	@echo " *** removing object files ***"
 	@echo " ***************************************"
 	@echo ""
-	rm -f *.o *% core *.for
+	rm -f *.a *.o *% core *.for
 #
 small:
 	@echo ""
