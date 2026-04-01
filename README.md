@@ -91,4 +91,38 @@ set fortran  = ""/usr/local/bin/gfortran""
         echo "Super "/usr/local/bin/gfortran" of NCAR Graphics"
         echo "Quick "/usr/local/bin/gfortran" of NCAR Graphics"
 ```
-The model compiles and works :)
+I also removed the compiler flag `-fopenmp`, which caused conflicts with the `-fno-automatic` for the box model.
+
+You can test the `ncl` installation by running the following examples, which should produce a plot, in the first instance, and complete successfully:
+```
+>> ng4ex xy01n -clean
+NCAR Graphics NCL Example <xy01n>                                                                                  Copying xy01n.ncl           
+  Copying xy01.res                                         
+Running NCL...                                 
+ Copyright (C) 1995-2019 - All Rights Reserved
+ University Corporation for Atmospheric Research
+ NCAR Command Language Version 6.6.2      
+ The use of this software is governed by a License Agreement.
+ See http://www.ncl.ucar.edu/ for more details.
+Finished running 'ncl < xy01n.ncl'...
+    
+> ncargex cpex08 -clean
+NCAR Graphics Fortran  Example <cpex08>
+  Copying cpex08.f
+  Copying cpexcc.f
+Compiling and linking...
+/usr/local/bin/gfortran -fPIC -fno-range-check -m64 -Wall -fopenmp -fallow-argument-mismatch -O -headerpad_max_install_names -Wl,-pie -Wl,-headerpad_max_install_names -Wl,-dead_strip_dylibs -Wl,-rpath,/usr/local/anaconda3/envs/ncl/lib -L/usr/local/anaconda3/envs/ncl/lib -o cpex08 cpexcc.f cpex08.f -L/usr/local/ncl-6.6.2/lib -L/opt/X11/lib -lncarg -lncarg_gks -lncarg_c -lXpm -lX11 -lXext /opt/X11/lib/libcairo.2.dylib /opt/X11/lib/libfontconfig.1.dylib /opt/X11/lib/libpixman-1.0.dylib /opt/X11/lib/libfreetype.6.dylib -lXrender -lexpat -lpng -lz -liconv -lbz2 -lpthread
+
+Executing <cpex08>...
+ PLOT TITLE WAS EXAMPLE 8
+ INTEGER WORKSPACE USED          120
+    REAL WORKSPACE USED          400
+    AREA MAP SPACE USED        93250
+ PLOT TITLE WAS EXAMPLE 8
+ INTEGER WORKSPACE USED          120
+    REAL WORKSPACE USED          400
+    AREA MAP SPACE USED       866064
+
+Metafile file is named cpex08.ncgm.
+```
+The box model now compiles and works (for me) :)
