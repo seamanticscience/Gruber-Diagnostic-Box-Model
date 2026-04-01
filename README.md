@@ -65,9 +65,11 @@ To visualize the results, look for the `gmeta` file, and run `ctrans -d x11 gmet
 
 Let me know if you have questions!
 
-TIPS:
+## TIPS:
 
-For my Intel Mac, I got a working install of `ncl` using conda (thanks to the install hints at [https://github.com/suvarchal/IPyNCL](https://github.com/suvarchal/IPyNCL/tree/ecdd7778dc00aff307f28e73c87a7e8b3bc7ddfd)):
+1. You may need to edit the Makefile in `src_ia` if `ROOT`, `F_C`, or `NCARF_C` values are not working. Don't forget to change the Makefiles in `diagboxmod`,  `plot`, `numrecip`, and `chem` subdirectories too!
+
+1. For my Intel Mac, I got a working install of `ncl` using conda (thanks to the install hints at [https://github.com/suvarchal/IPyNCL](https://github.com/suvarchal/IPyNCL/tree/ecdd7778dc00aff307f28e73c87a7e8b3bc7ddfd)):
 ```
 >>conda create -n ncl -c conda-forge -c ncar ncl=6.6.2 gsl python=3.6 jupyter
 ```
