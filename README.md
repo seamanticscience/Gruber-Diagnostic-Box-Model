@@ -1,6 +1,6 @@
 Niki Gruber's classic box model for BATS and BERM from 1996--2002.
 
-REQUIREMENTS: Linux OS with `gfortran` compiler and an installation of `NCL` for graphics output (I used `Conda` for this in a new environment, and it works well).
+REQUIREMENTS: Linux/Mac OS with `gfortran` compiler and an installation of `NCL` for graphics output (I used `Conda` for this in a new environment, and it works well).
 
 USAGE: head over to `bin_ia` directory, and run `./recompile_model` to get started. Assuming no errors, run `./diag_boxmodel_ia.x` and follow the onscreen instructions:
 
@@ -63,4 +63,30 @@ USAGE: head over to `bin_ia` directory, and run `./recompile_model` to get start
 
 To visualize the results, look for the `gmeta` file, and run `ctrans -d x11 gmeta` for an on-screen preview, or `ctrans -d ps.color gmeta > plots.ps` for a file.
 
-Let me know if you have questions or can figure out how to make this run on MacOS!
+Let me know if you have questions!
+
+TIPS:
+
+For my Intel Mac, I got a working install of `ncl` using conda (thanks to the install hints at [https://github.com/suvarchal/IPyNCL](https://github.com/suvarchal/IPyNCL/tree/ecdd7778dc00aff307f28e73c87a7e8b3bc7ddfd)):
+```
+>>conda create -n ncl -c conda-forge -c ncar ncl=6.6.2 gsl python=3.6 jupyter
+```
+and then edited `/usr/local/anaconda3/envs/ncl/bin/ncargf90` to point to my installation of `gfortran`:
+```
+>> conda activate ncl
+>> grep -i gfortran /usr/local/anaconda3/envs/ncl/bin/ncargf90                                                                      (ncl) 
+set fortran  = ""/Users/runner/miniforge3/conda-bld/ncl_1672316636637/_build_env/bin/x86_64-apple-darwin13.4.0-gfortran""
+        echo "Smooth "/Users/runner/miniforge3/conda-bld/ncl_1672316636637/_build_env/bin/x86_64-apple-darwin13.4.0-gfortran" of NCAR Graphics"
+        echo "Super "/Users/runner/miniforge3/conda-bld/ncl_1672316636637/_build_env/bin/x86_64-apple-darwin13.4.0-gfortran" of NCAR Graphics"
+        echo "Quick "/Users/runner/miniforge3/conda-bld/ncl_1672316636637/_build_env/bin/x86_64-apple-darwin13.4.0-gfortran" of NCAR Graphics"
+```
+to
+```
+>> conda activate ncl
+>> grep -i gfortran /usr/local/anaconda3/envs/ncl/bin/ncargf90                                                  (ncl) 
+set fortran  = ""/usr/local/bin/gfortran""
+        echo "Smooth "/usr/local/bin/gfortran" of NCAR Graphics"
+        echo "Super "/usr/local/bin/gfortran" of NCAR Graphics"
+        echo "Quick "/usr/local/bin/gfortran" of NCAR Graphics"
+```
+The model compiles and works :)
